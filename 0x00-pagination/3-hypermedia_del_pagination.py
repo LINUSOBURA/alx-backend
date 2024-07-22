@@ -44,7 +44,8 @@ class Server:
         """
         Retrieves indexed data based on the provided index and page size.
         """
-        assert index is not None and index >= 0, "Index must be a non-negative integer"
+        assert index is not None and index >= 0,\
+            "Index must be a non-negative integer"
         indexed_data = self.indexed_dataset()
         data_length = len(indexed_data)
         assert index < data_length, "Index is out of range"
