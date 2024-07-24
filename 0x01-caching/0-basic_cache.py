@@ -5,6 +5,7 @@ from base_caching import BaseCaching
 
 
 class BasicCache(BaseCaching):
+    """ BasicCache class """
 
     def __init__(self):
         super().__init__()
@@ -13,10 +14,8 @@ class BasicCache(BaseCaching):
         """
         Adds an item to the cache.
         """
-        if key is None or item is None:
-            return
-
-        self.cache_data[key] = item
+        if key is not None or item is not None:
+            self.cache_data[key] = item
 
     def get(self, key):
         """ Gets an item from Cache"""
