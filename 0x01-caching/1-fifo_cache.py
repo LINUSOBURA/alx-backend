@@ -15,10 +15,8 @@ class FIFOCache(BaseCaching):
          Adds an item to the cache.
          If the cache is full, the least recently used item is discarded.
         """
-        if key is None or item is None:
-            return
-
-        self.cache_data[key] = item
+        if key is not None and item is not None:
+            self.cache_data[key] = item
 
         if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
             self.cache_data.pop(next(iter(self.cache_data)))
