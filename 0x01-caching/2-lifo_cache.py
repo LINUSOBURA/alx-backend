@@ -14,12 +14,10 @@ class LIFOCache(BaseCaching):
         """
         Adds an item to the cache.
         """
-        if key is None or item is None:
-            return
+        if key is not None and item is not None:
+            self.cache_data[key] = item
 
-        self.cache_data[key] = item
-
-        if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             self.cache_data.pop(next(reversed(self.cache_data)))
             print("DISCARD: {}".format(next(reversed(self.cache_data))))
 
