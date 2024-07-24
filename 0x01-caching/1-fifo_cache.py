@@ -5,6 +5,7 @@ from base_caching import BaseCaching
 
 
 class FIFOCache(BaseCaching):
+    """FIFO Caching Class"""
 
     def __init__(self):
         super().__init__()

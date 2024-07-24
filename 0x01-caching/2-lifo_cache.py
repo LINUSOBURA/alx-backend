@@ -5,6 +5,7 @@ from base_caching import BaseCaching
 
 
 class LIFOCache(BaseCaching):
+    """ LIFOCache class """
 
     def __init__(self):
         super().__init__()
