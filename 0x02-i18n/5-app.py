@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Babel"""
+""" Flask Application """
 from typing import Dict, Union
 
 from flask import Flask, g, render_template, request
@@ -10,7 +10,7 @@ babel = Babel(app)
 
 
 class Config(object):
-    """ Config class"""
+    """ Configuration class """
     LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
@@ -44,15 +44,15 @@ users = {
 
 @babel.localeselector
 def get_locale() -> str:
-    """get locale"""
+    """get locale from request object """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
         return locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user() -> Dict[str, Union[str, None]]:
-    """get user"""
+def get_user() -> Union[Dict[str, Union[str, None]], None]:
+    """get user """
     try:
         user_id = int(request.args.get('login_as'))
         return users.get(user_id)
@@ -62,7 +62,7 @@ def get_user() -> Dict[str, Union[str, None]]:
 
 @app.before_request
 def before_request():
-    """Before Request"""
+    """Add valid user to global session"""
     g.user = get_user()
 
 
