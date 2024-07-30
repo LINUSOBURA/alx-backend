@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Babel"""
+""" A simple flask APP """
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
@@ -18,7 +18,7 @@ app.config.from_object(Config)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """get locale"""
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -27,7 +27,7 @@ def get_locale():
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """ Default route"""
     home_title = gettext('home_title')
     home_header = gettext('home_header')
