@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """ Babel"""
+from typing import Dict, Union
+
 from flask import Flask, g, render_template, request
 from flask_babel import Babel, gettext
 
@@ -41,7 +43,7 @@ users = {
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """get locale"""
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
@@ -49,7 +51,8 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-def get_user():
+def get_user() -> Dict[str, Union[str, None]]:
+    """get user"""
     try:
         user_id = int(request.args.get('login_as'))
         return users.get(user_id)
@@ -59,11 +62,12 @@ def get_user():
 
 @app.before_request
 def before_request():
+    """Before Request"""
     g.user = get_user()
 
 
 @app.route('/')
-def index():
+def index() -> str:
     """ Default route"""
     home_title = gettext('home_title')
     home_header = gettext('home_header')
