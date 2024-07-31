@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ A simple flask APP """
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel, _
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -29,8 +29,8 @@ def get_locale() -> str:
 @app.route('/')
 def index() -> str:
     """ Default route"""
-    home_title = gettext('home_title')
-    home_header = gettext('home_header')
+    home_title = _('home_title')
+    home_header = _('home_header')
     return render_template('4-index.html',
                            home_title=home_title,
                            home_header=home_header)
